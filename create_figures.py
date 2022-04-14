@@ -81,25 +81,25 @@ if __name__=="__main__":
 
 	bar_chart = alt.Chart(cj_df).mark_bar().encode(
     				x=alt.X('year:O', title='Year'),
-    				y=alt.Y('count()', title="Carjackings"),
+    				y=alt.Y('count()', title="Number carjackings"),
     				color=alt.Color('recovered')
-				).properties(width=300,height=400)
+				).properties(width=300,height=400, title='Figure 2: proportion of cars recovered has decreased as number of carjackings have increased')
 
 	save_chart(bar_chart, figures/"carjackings_bar_chart.png")
 
 
 	line_chart = alt.Chart(get_group_counts(cj_df, ['year', 'recovered'])).mark_line(color="#06063c").encode(
     				x=alt.X('year:O', title='Year'),
-    				y=alt.Y('proportion_recovered', title="% of carjacked cars recovered", axis=alt.Axis(format='.0%'), scale=alt.Scale(domain=[0, 1]))
-    			).properties(width=500,height=400)
+    				y=alt.Y('proportion_recovered', title="% cars recovered", axis=alt.Axis(format='.0%'), scale=alt.Scale(domain=[0, 1]))
+    			).properties(width=500,height=400, title='Figure 1: less than 20% of carjacked cars are recovered each year')
 
 	save_chart(line_chart, figures/"carjackings_line_chart.png")
 
 
 	month_chart = alt.Chart(get_group_counts(cj_df, ['month-year', 'recovered'])).mark_line(color="#06063c").encode(
     				x=alt.X('month-year:T', title='Month', axis=alt.Axis(format='%b-%Y')),
-    				y=alt.Y('proportion_recovered', title="% of carjacked cars recovered", axis=alt.Axis(format='.0%'), scale=alt.Scale(domain=[0, 1]))
-    			).properties(width=800,height=300)
+    				y=alt.Y('proportion_recovered', title="% cars recovered", axis=alt.Axis(format='.0%'), scale=alt.Scale(domain=[0, 1]))
+    			).properties(width=800,height=300, title='Figure 3:  monthly percentage of carjacked cars that were recovered in Chicago, 2017-2021')
 	lines = alt.Chart(pd.DataFrame({'month-year': ['2021-01', '2020-04', '2021-03']})).mark_rule(color="#902727").encode(
 				x=alt.X('month-year:T', axis=alt.Axis(format='%b-%Y')))
 
